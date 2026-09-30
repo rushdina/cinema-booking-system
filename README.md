@@ -203,11 +203,11 @@ The frontend communicates with PHP endpoints using the JavaScript Fetch API.
 | ----------------------- | ------------------------------------------------------------------------------ |
 | `getMovies.php`         | Retrieves Now Showing and Coming Soon movies                                   |
 | `getMovieDetails.php`   | Retrieves movie details and available showtimes                                |
-| `getBookingDetails.php` | Retrieves movie, cinema, hall, ticket price, and seat availability information |
-| `getSeatsId.php`        | Retrieves database seat IDs for selected seats                                 |
+| `getBookingDetails.php` | Retrieves selected screening details: movie, cinema, hall, ticket price, and seat availability |
+| `getSeatsId.php`        | Retrieves database seat IDs for selected seats & Converts selected seat labels into database seat IDs                                 |
 | `checkReferenceID.php`  | Checks whether a generated booking reference ID is unique                      |
-| `saveBooking.php`       | Saves booking and selected seat information to the database                    |
-| `checkBooking.php`      | Retrieves an existing booking using customer and booking information           |
+| `saveBooking.php`       | Saves booking and selected seat information to the MySQL database                    |
+| `checkBooking.php`      | Retrieves an existing booking using customer and booking information: name, email and booking ID reference           |
 
 ## 💾 Data Flow
 
