@@ -1,6 +1,5 @@
-<!-- checkReferenceID.php -->
-
 <?php
+// checkReferenceID.php
 header("Content-Type: application/json");
 
 $servername = "localhost";

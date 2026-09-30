@@ -1,6 +1,5 @@
-<!-- getMovieDetails.php -->
-
 <?php
+// getMovieDetails.php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -37,13 +36,11 @@ $movieQuery = "
 $movieResult = $conn->query($movieQuery);
 if ($movieResult->num_rows > 0) {
     $movie = $movieResult->fetch_assoc();
-    $today = date('Y-m-d');
-    $cutoffDate = date('Y-m-d', strtotime('+5 days'));
     $showtimesQuery = "
         SELECT c.name AS cinema_name, s.date, s.time
         FROM showtimes s
         JOIN cinemas c ON s.cinema_id = c.cinema_id
-        WHERE s.movie_id = " . $movie['movie_id'] . " AND s.date BETWEEN '$today' AND '$cutoffDate'
+        WHERE s.movie_id = " . $movie['movie_id'] . "
         ORDER BY c.name, s.date, s.time";
     $showtimesResult = $conn->query($showtimesQuery);
     $showtimes = [];

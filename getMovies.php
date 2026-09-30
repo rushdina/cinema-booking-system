@@ -1,6 +1,6 @@
-<!-- getMovies.php -->
-
 <?php
+// getMovies.php
+
 header("Content-Type: application/json");
 
 $servername = "localhost";

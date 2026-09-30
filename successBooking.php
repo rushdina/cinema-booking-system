@@ -1,5 +1,5 @@
-<!-- successBooking.php -->
 <?php
+// successBooking.php
 $bookingDetails = [
     "bookingId" => "0FR9XGRLTF",
     "movieTitle" => "The Wild Robot",
