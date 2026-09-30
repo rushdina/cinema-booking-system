@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function validateEmail(inputId) {
     const emailInput = document.getElementById(inputId);
     const emailError = document.getElementById(`${inputId}-error`);
-    const allowedDomainsRegex = /^[^\s@]+@localhost$/;
+    const emailRegex = /^[^\s@]+@(?:localhost|[^\s@]+\.[^\s@]+)$/;
 
     if (!emailError) return;
 
@@ -99,9 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (!emailInput.value.includes("@")) {
       emailError.textContent = "Email must contain '@'.";
       return false;
-    } else if (!allowedDomainsRegex.test(emailInput.value)) {
-      emailError.textContent =
-        "Please enter a valid email with the domain 'localhost'.";
+    } else if (!emailRegex.test(emailInput.value)) {
+      emailError.textContent = "Please enter a valid email address.";
       return false;
     }
 

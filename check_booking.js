@@ -52,10 +52,10 @@ function validateEmail() {
     emailError.textContent = "Email is required.";
     return false;
   }
-  const emailRegex = /^[^\s@]+@localhost$/;
+  // const emailRegex = /^[^\s@]+@localhost$/;
+  const emailRegex = /^[^\s@]+@(?:localhost|[^\s@]+\.[^\s@]+)$/;
   if (!emailRegex.test(emailInput.value)) {
-    emailError.textContent =
-      "Please enter a valid email with the domain 'localhost'.";
+    emailError.textContent = "Please enter a valid email address.";
     return false;
   }
   emailError.textContent = "";
