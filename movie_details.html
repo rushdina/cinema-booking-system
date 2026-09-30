@@ -1,0 +1,434 @@
+<!-- movie_details.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+
+    <title>Movie Details</title>
+    <script defer src="movie_details.js"></script>
+    <style>
+      /* Reset body and html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        font-family: "League Spartan";
+        background-color: #1e1e1e;
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Header Navbar */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar {
+        background-color: #101720;
+        padding: 15px 0;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 1400px;*/
+        width: 100%;
+        padding: 0 60px;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .menu {
+        list-style-type: none;
+        display: flex;
+        gap: 40px;
+      }
+
+      .menu li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .menu li a:hover,
+      .menu li a.active {
+        color: #ffc107;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 928px) {
+        .menu {
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 785px) {
+        .navbar-content {
+          flex-direction: column;
+        }
+
+        .menu {
+          flex-direction: column;
+          gap: 15px;
+          display: none;
+          text-align: center;
+        }
+
+        .menu li a {
+          font-size: 18px;
+        }
+
+        /* Hamburger icon */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 5px 0;
+        }
+
+        /* Show menu when toggled */
+        .menu.show {
+          display: flex;
+        }
+      }
+
+      /* Movie Details Section */
+      .movie-details {
+        padding-top: 150px;
+        max-width: 1200px;
+        margin: auto;
+        color: #ccc;
+        padding-bottom: 40px;
+        line-height: 1.6;
+      }
+
+      .movie-info {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 30px;
+        background-color: #292929;
+        border-radius: 8px;
+        padding: 40px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .movie-info img {
+        width: 250px;
+        height: 400px;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .movie-description h2 {
+        font-size: 2.2rem;
+        font-weight: 500;
+        color: #ffc107;
+        margin-bottom: 15px;
+      }
+
+      .movie-details-info p {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+        color: #e0e0e0;
+      }
+
+      .movie-details-info span:first-child {
+        font-weight: 400;
+        color: #ffc107;
+      }
+
+      /* Row styling for genre to opening */
+      .details-row {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+        padding: 10px 0;
+      }
+
+      .details-row span {
+        font-size: 1.1rem;
+        color: #e0e0e0;
+      }
+
+      .details-row span:first-child {
+        font-weight: 400;
+        color: #ffc107;
+      }
+
+      /* Showtime Section */
+      .showtime-section {
+        background-color: #292929;
+        padding: 40px;
+        border-radius: 8px;
+        margin-top: 40px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Dropdown Menu */
+      #cinema-select {
+        padding: 10px;
+        font-size: 1rem;
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 300px;
+        cursor: pointer;
+      }
+
+      .cinema-select {
+        font-size: 20px;
+        padding-right: 40px;
+      }
+
+      .showtime-section h3 {
+        margin-top: 40px;
+        font-size: 32px;
+        font-weight: 400;
+      }
+
+      /* Table Styling */
+      #showtimes-table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+      }
+
+      #showtimes-table th {
+        background-color: #1e1e1e;
+        color: #ccc;
+        padding: 12px;
+        font-size: 1rem;
+        letter-spacing: 1.2px;
+      }
+
+      #showtimes-table td {
+        padding: 12px;
+        color: #ffffff;
+        font-size: 1rem;
+        border-top: 1px solid #333;
+        text-align: center;
+      }
+
+      /* Time Slot Buttons */
+      .time-slot-button {
+        background-color: #ffc107;
+        color: #121212;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        transition: background-color 0.3s;
+        font-size: 0.9rem;
+      }
+
+      .time-slot-button:hover {
+        background-color: #9d6004;
+        color: #fff;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1290px) {
+        .movie-details {
+          padding-left: 60px;
+          padding-right: 60px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .movie-info {
+          flex-direction: column;
+          align-items: center;
+          padding: 20px;
+        }
+
+        .movie-info img {
+          width: 100%;
+          max-width: 300px;
+          height: auto;
+        }
+
+        .movie-description h2,
+        .movie-details-info p,
+        .details-row p {
+          text-align: center;
+        }
+
+        .details-row {
+          flex-direction: column;
+          gap: 15px;
+          align-items: left;
+        }
+
+        .showtime-section {
+          padding: 20px;
+        }
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 80px;
+        background-color: #101720;
+        color: #ccc;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <!-- Logo -->
+          <div class="logo">
+            <img src="media/logo.png" alt="Cinestar Logo" />
+          </div>
+
+          <!-- Toggle button for mobile -->
+          <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+          <!-- Menu -->
+          <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li>
+              <a href="index.html#movies" id="moviesLink" class="active"
+                >MOVIES</a
+              >
+            </li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="check_booking.html">CHECK BOOKING</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="movie-details">
+      <div class="movie-info">
+        <img id="movie-image" src="" alt="Movie Image" />
+        <div class="movie-description">
+          <h2 id="movie-title"></h2>
+          <div class="movie-details-info">
+            <p>
+              <span>Cast</span><br />
+              <span id="movie-cast"></span>
+            </p>
+            <p>
+              <span>Director</span><br />
+              <span id="movie-director"></span>
+            </p>
+            <p>
+              <span>Synopsis</span><br />
+              <span id="movie-synopsis"></span>
+            </p>
+          </div>
+          <!-- Single Row for Genre to Opening -->
+          <div class="details-row">
+            <p>
+              <span>Genre</span><br />
+              <span id="movie-genre"></span>
+            </p>
+            <p>
+              <span>Language</span><br />
+              <span id="movie-language"></span>
+            </p>
+            <p>
+              <span>Rating</span><br />
+              <span id="movie-rating"></span>
+            </p>
+            <p>
+              <span>Runtime</span><br />
+              <span id="movie-runtime"></span>
+            </p>
+            <p>
+              <span>Opening</span><br />
+              <span id="movie-release-date"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="showtime-section">
+        <label for="cinema-select" class="cinema-select"
+          >Select a Cinema:</label
+        >
+        <select id="cinema-select">
+          <option value="">Choose a Location</option>
+          <option value="Cinestar Arc">Cinestar Arc</option>
+          <option value="Cinestar Hive">Cinestar Hive</option>
+        </select>
+        <h3>Showtimes</h3>
+        <table id="showtimes-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Available Times</th>
+            </tr>
+          </thead>
+          <tbody id="showtimes-body">
+            <!-- Showtimes will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 CINESTAR. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const moviesLink = document.querySelector(".menu li a[href='#movies']");
+        const currentHash = window.location.hash;
+
+        if (currentHash === "#movies") {
+          moviesLink.classList.add("active");
+        }
+      });
+
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

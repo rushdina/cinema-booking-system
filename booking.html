@@ -1,0 +1,470 @@
+<!-- booking.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+
+    <title>Booking</title>
+    <script src="booking.js" defer></script>
+    <style>
+      /* Reset body and html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        font-family: "League Spartan";
+        background-color: #1e1e1e;
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Header Navbar */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar {
+        background-color: #101720;
+        padding: 15px 0;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 1400px;*/
+        width: 100%;
+        padding: 0 60px;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .menu {
+        list-style-type: none;
+        display: flex;
+        gap: 40px;
+      }
+
+      .menu li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .menu li a:hover,
+      .menu li a.active {
+        color: #ffcc00;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 928px) {
+        .menu {
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 785px) {
+        .navbar-content {
+          flex-direction: column;
+        }
+
+        .menu {
+          flex-direction: column;
+          gap: 15px;
+          display: none;
+          text-align: center;
+        }
+
+        .menu li a {
+          font-size: 18px;
+        }
+
+        /* Hamburger icon */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 5px 0;
+        }
+
+        /* Show menu when toggled */
+        .menu.show {
+          display: flex;
+        }
+      }
+
+      /* Booking Section */
+      .booking-container {
+        padding: 60px;
+        max-width: 1200px;
+        margin: 150px auto 80px auto;
+        color: #ccc;
+        display: flex;
+        gap: 40px;
+        background-color: #292929;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        flex-wrap: wrap;
+      }
+
+      .booking-details {
+        flex: 1;
+        min-width: 280px;
+        width: 40%;
+        text-align: left;
+      }
+
+      .booking-details h2 {
+        font-weight: 500px;
+        margin-bottom: 40px;
+      }
+
+      .movie-image-left img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        margin-bottom: 40px;
+      }
+
+      .booking-details p {
+        font-size: 18px;
+        margin-bottom: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      .selection-container {
+        margin-top: 40px;
+      }
+
+      .selection-header,
+      .booking-details h3 {
+        color: #ffcc00;
+        font-weight: 500;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      #ticket-type label {
+        font-size: 18px;
+        margin-right: 40px;
+      }
+
+      #price-container h3 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      /* Seat Grid */
+      #seat-selection h3 {
+        margin-bottom: 40px;
+        font-weight: 400;
+        font-size: 20px;
+      }
+
+      .screen-label {
+        width: 100%;
+        background-color: #1e1e1e;
+        color: #ccc;
+        text-align: center;
+        padding: 12px;
+        font-weight: 400;
+        border-radius: 8px;
+        margin-bottom: 40px;
+      }
+
+      .seat-grid-container {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      #seat-selection {
+        display: flex;
+        align-items: center;
+
+        flex-direction: column;
+      }
+
+      #seat-grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .seat {
+        width: 45px;
+        height: 45px;
+        background-color: #1e90ff;
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: #ffffff;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
+
+      .seat.unavailable {
+        background-color: #888;
+        cursor: not-allowed;
+      }
+
+      .seat.selected {
+        background-color: #ffc107;
+        color: #101720;
+      }
+
+      .seat:hover:not(.occupied):not(.selected) {
+        color: #101720;
+        background-color: #ffc107;
+      }
+
+      /* Legends */
+      .legend {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .legend .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .legend .legend-box {
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+      }
+
+      .legend-box.available {
+        background-color: #1e90ff;
+      }
+
+      .legend-box.occupied {
+        background-color: #888;
+      }
+
+      .legend-box.selected {
+        background-color: #ffc107;
+      }
+
+      /* Enhanced Proceed to Payment Button */
+      .proceed-button {
+        background: #ffc107;
+        color: #121212;
+        padding: 15px 30px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .proceed-button:hover {
+        background: #9d6004;
+        color: #ccc;
+        transform: scale(1.05);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 970px) {
+        .booking-container {
+          flex-direction: column;
+          padding: 60px;
+          gap: 60px;
+        }
+
+        .booking-details {
+          width: 50%;
+        }
+
+        .movie-image-left img {
+          max-width: 100%;
+          margin: 0 auto 20px;
+        }
+
+        #seat-selection h3,
+        #seat-selection .screen-label {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 80px;
+        background-color: #101720;
+        color: #ccc;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <!-- Logo -->
+          <div class="logo">
+            <img src="media/logo.png" alt="Cinestar Logo" />
+          </div>
+
+          <!-- Toggle button for mobile -->
+          <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+          <!-- Menu -->
+          <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html#movies" class="active">MOVIES</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="check_booking.html">CHECK BOOKING</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="booking-container">
+        <!-- Booking Details Section -->
+        <div class="booking-details">
+          <h2 id="movie-title"></h2>
+          <div class="movie-image-left">
+            <img id="movie-image" src="" alt="Movie Image" />
+          </div>
+
+          <p>
+            <strong>Location:&nbsp;&nbsp;&nbsp;</strong>
+            <span id="selected-location"></span>
+          </p>
+          <p>
+            <strong>Date:&nbsp;&nbsp;&nbsp;</strong>
+            <span id="selected-date"></span>
+          </p>
+          <p>
+            <strong>Time:&nbsp;&nbsp;&nbsp;</strong>
+            <span id="selected-time"></span>
+          </p>
+
+          <!-- Ticket Selection Section -->
+          <div id="ticket-type" class="selection-container">
+            <h3 class="selection-header">Select Ticket Type</h3>
+            <label>
+              <input type="radio" name="ticket-type" value="standard" />
+              Standard ($14.50)
+            </label>
+            <label>
+              <input type="radio" name="ticket-type" value="student" /> Student
+              ($10)
+            </label>
+          </div>
+
+          <!-- Price Display Section -->
+          <div id="price-container">
+            <h3>
+              Selected Price: $<span id="selected-price-value">0.00</span>
+            </h3>
+            <h3>Total Price: $<span id="total-price-value">0.00</span></h3>
+            <button id="proceed-payment" class="proceed-button">
+              Proceed to Payment
+            </button>
+          </div>
+        </div>
+
+        <!-- Seat Selection Section -->
+        <div id="seat-selection">
+          <h3>Select Your Seats</h3>
+          <div class="screen-label">SCREEN</div>
+
+          <!-- Legend Section -->
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-box available"></div>
+              <span>Available</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box occupied"></div>
+              <span>Occupied</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box selected"></div>
+              <span>Selected</span>
+            </div>
+          </div>
+
+          <!-- Seat Grid -->
+          <div id="seat-grid" class="seat-grid-container">
+            <!-- Seat grid area -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 CINESTAR. All rights reserved.</p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const moviesLink = document.querySelector(".menu li a[href='#movies']");
+        const currentHash = window.location.hash;
+
+        if (currentHash === "#movies") {
+          moviesLink.classList.add("active");
+        }
+      });
+
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,279 @@
+<!-- contact.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+
+    <title>Contact</title>
+    <style>
+      /* Reset body and html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        font-family: "League Spartan";
+        background-color: #1e1e1e;
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Header Navbar */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar {
+        background-color: #101720;
+        padding: 15px 0;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 1400px;*/
+        width: 100%;
+        padding: 0 60px;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .menu {
+        list-style-type: none;
+        display: flex;
+        gap: 40px;
+      }
+
+      .menu li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .menu li a:hover,
+      .menu li a.active {
+        color: #ffc107;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 928px) {
+        .menu {
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 785px) {
+        .navbar-content {
+          flex-direction: column;
+        }
+
+        .menu {
+          flex-direction: column;
+          gap: 15px;
+          display: none;
+          text-align: center;
+        }
+
+        .menu li a {
+          font-size: 18px;
+        }
+
+        /* Hamburger icon */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 5px 0;
+        }
+
+        /* Show menu when toggled */
+        .menu.show {
+          display: flex;
+        }
+      }
+
+      /* Contact Section */
+      .contact-container {
+        max-width: 800px;
+        margin: 120px auto 2rem;
+        padding: 2rem;
+        background-color: #292929;
+        color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      .contact-container h2 {
+        color: #ffc107;
+        font-size: 2rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      .contact-container p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: #cccccc;
+      }
+
+      .contact-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+        line-height: 1.4;
+      }
+
+      .contact-table th,
+      .contact-table td {
+        padding: 1.2rem;
+        border: 1px solid #444;
+        text-align: left;
+      }
+
+      .contact-table th {
+        background-color: #333;
+        color: #ffc107;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .contact-table td {
+        background-color: #1e1e1e;
+        color: #ccc;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 80px;
+        background-color: #101720;
+        color: #ccc;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <!-- Logo -->
+          <div class="logo">
+            <img src="media/logo.png" alt="Cinestar Logo" />
+          </div>
+
+          <!-- Toggle button for mobile -->
+          <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+          <!-- Menu -->
+          <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html#movies">MOVIES</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html" class="active">CONTACT</a></li>
+            <li><a href="check_booking.html">CHECK BOOKING</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="contact-container">
+        <h2>Contact Us</h2>
+        <p>
+          Feel free to reach out with any questions, feedback, or inquiries.
+        </p>
+
+        <table class="contact-table">
+          <tr>
+            <th>Company Name</th>
+            <td>CINESTAR Pte Ltd</td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>
+              CineStar Multiplex Pte Ltd<br />
+              3 Temasek Boulevard #03-373<br />
+              Suntec City Mall<br />
+              Singapore 038983<br />
+              (East Atrium, next to Tower 4, Level 3)
+            </td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>
+              <a
+                href="mailto:support@cinestar.com.sg"
+                style="color: #ffc107; text-decoration: none"
+                >support@cinestar.com.sg</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Cinema Locations</th>
+            <td>
+              Cinestar Arc<br />
+              63 Nanyang Dr, Singapore 636922<br /><br />
+              Cinestar Hive<br />
+              52 Nanyang Ave, Singapore 639816<br />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 CINESTAR. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const moviesLink = document.querySelector(".menu li a[href='#movies']");
+        const currentHash = window.location.hash;
+
+        if (currentHash === "#movies") {
+          moviesLink.classList.add("active");
+        }
+      });
+
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

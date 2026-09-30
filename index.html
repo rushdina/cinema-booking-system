@@ -1,0 +1,385 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+
+    <title>CINESTAR</title>
+    <style>
+      /* Reset body and html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        font-family: "League Spartan";
+        background-color: #1e1e1e;
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Header Navbar */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar {
+        background-color: #101720;
+        padding: 15px 0;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 1400px;*/
+        width: 100%;
+        padding: 0 60px;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .menu {
+        list-style-type: none;
+        display: flex;
+        gap: 40px;
+      }
+
+      .menu li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .menu li a:hover,
+      .menu li a.active {
+        color: #ffc107;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 928px) {
+        .menu {
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 785px) {
+        .navbar-content {
+          flex-direction: column;
+        }
+
+        .menu {
+          flex-direction: column;
+          gap: 15px;
+          display: none;
+          text-align: center;
+        }
+
+        .menu li a {
+          font-size: 18px;
+        }
+
+        /* Hamburger icon */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 5px 0;
+        }
+
+        /* Show menu when toggled */
+        .menu.show {
+          display: flex;
+        }
+      }
+
+      /* Banner Slideshow */
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .slide {
+        display: none;
+        height: 100vh;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        /*width: auto;*/
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+        user-select: none;
+      }
+
+      .next {
+        right: 0;
+      }
+
+      .prev {
+        left: 0;
+      }
+
+      /* Movies section */
+      .movie-nav {
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 60px;
+      }
+
+      .movie-nav-btn {
+        font-size: 20px;
+        font-family: "League Spartan";
+        padding: 14px 20px;
+        margin: 0 15px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        background-color: transparent;
+        transition: background-color 0.3s;
+      }
+
+      .movie-nav-btn.active,
+      .movie-nav-btn:hover {
+        background-color: #ffc107;
+        color: black;
+      }
+
+      /* Movies Grid */
+      .movie-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        padding: 40px 50px 0 50px;
+        max-width: 1500px;
+        margin: 0 auto;
+        background-color: #1e1e1e;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1280px) {
+        .movie-grid {
+          grid-template-columns: repeat(3, 1fr);
+          padding: 60px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .movie-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .movie-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .movie-item {
+        background-color: #2b2b2b;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s;
+      }
+
+      .movie-item:hover {
+        transform: scale(1.05);
+      }
+
+      .movie-item img {
+        width: 100%;
+        border-bottom: 2px solid #ffcc00;
+      }
+
+      .movie-item h3 {
+        margin: 15px 0;
+        font-size: 16px;
+        padding: 0 10px;
+        flex-grow: 1;
+      }
+
+      .movie-item button {
+        background-color: #ffc107;
+        color: #101720;
+        padding: 10px 15px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      .movie-item button:hover {
+        background-color: #9d6004;
+        color: #fff;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 80px;
+        background-color: #101720;
+        color: #ccc;
+        font-size: 14px;
+      }
+    </style>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <!-- Logo -->
+          <div class="logo">
+            <img src="media/logo.png" alt="Cinestar Logo" />
+          </div>
+
+          <!-- Toggle button for mobile -->
+          <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+          <!-- Menu -->
+          <ul class="menu">
+            <li><a href="index.html" class="active">HOME</a></li>
+            <li><a href="#movies" id="moviesLink">MOVIES</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="check_booking.html">CHECK BOOKING</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Full-page slideshow -->
+      <div class="slideshow-container">
+        <div class="slide fade">
+          <img src="media/slides/movie1.jpg" alt="Movie 1" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie3.jpg" alt="Movie 3" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie5.jpg" alt="Movie 5" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie6.jpg" alt="Movie 6" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie9.jpg" alt="Movie 9" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie12.jpg" alt="Movie 12" />
+        </div>
+        <div class="slide fade">
+          <img src="media/slides/movie15.jpg" alt="Movie 15" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+
+      <!-- Movie grid section -->
+      <section id="movies">
+        <!-- Movie navigation buttons -->
+        <div class="movie-nav">
+          <button id="nowShowingBtn" class="movie-nav-btn active">
+            Now Showing
+          </button>
+          <button id="comingSoonBtn" class="movie-nav-btn">Coming Soon</button>
+        </div>
+        <div id="movie-list" class="movie-grid"></div>
+        <!-- Movies will be dynamically added here from home.js -->
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 CINESTAR. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const moviesLink = document.getElementById("moviesLink");
+        const allMenuLinks = document.querySelectorAll(".menu li a");
+
+        // Function to set the clicked link as active
+        function setActiveLink(link) {
+          allMenuLinks.forEach((menuLink) =>
+            menuLink.classList.remove("active"),
+          ); // Clear active class from all links
+          link.classList.add("active"); // Add active class to the clicked link
+        }
+
+        // Add click event to Movies link
+        moviesLink.addEventListener("click", (e) => {
+          e.preventDefault(); // Prevent default anchor behavior
+          setActiveLink(moviesLink); // Set Movies link as active
+
+          // Smoothly scroll to the movies section
+          document
+            .querySelector("#movies")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

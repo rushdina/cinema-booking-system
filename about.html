@@ -1,0 +1,370 @@
+<!-- about.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+
+    <title>About</title>
+    <style>
+      /* Reset body and html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        font-family: "League Spartan";
+        background-color: #1e1e1e;
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Header Navbar */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar {
+        background-color: #101720;
+        padding: 15px 0;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 1400px;*/
+        width: 100%;
+        padding: 0 60px;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .menu {
+        list-style-type: none;
+        display: flex;
+        gap: 40px;
+      }
+
+      .menu li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .menu li a:hover,
+      .menu li a.active {
+        color: #ffcc00;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 928px) {
+        .menu {
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 785px) {
+        .navbar-content {
+          flex-direction: column;
+        }
+
+        .menu {
+          flex-direction: column;
+          gap: 15px;
+          display: none;
+          text-align: center;
+        }
+
+        .menu li a {
+          font-size: 18px;
+        }
+
+        /* Hamburger icon */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 24px;
+          padding: 5px 0;
+        }
+
+        /* Show menu when toggled */
+        .menu.show {
+          display: flex;
+        }
+      }
+
+      /* Carousel Styling */
+      .carousel-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 100px auto 40px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .carousel-slide {
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Carousel Navigation Buttons */
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 10px;
+        color: #fff;
+        font-size: 20px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 5px;
+        z-index: 10;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+      /* Main Content */
+      .main-content {
+        max-width: 800px;
+        margin: 0 auto 40px;
+        padding: 20px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .main-content h2 {
+        color: #ffc107;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      .main-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: #cccccc;
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 80px;
+        background-color: #101720;
+        color: #ccc;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <!-- Logo -->
+          <div class="logo">
+            <img src="media/logo.png" alt="Cinestar Logo" />
+          </div>
+
+          <!-- Toggle button for mobile -->
+          <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+          <!-- Menu -->
+          <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html#movies">MOVIES</a></li>
+            <li><a href="about.html" class="active">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="check_booking.html">CHECK BOOKING</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Carousel Section at the Top -->
+    <div class="carousel-container">
+      <div class="carousel-slide">
+        <img src="media/theatre/slide1.png" alt="Cinema Image 1" />
+      </div>
+      <div class="carousel-slide">
+        <img src="media/theatre/slide2.png" alt="Cinema Image 2" />
+      </div>
+      <div class="carousel-slide">
+        <img src="media/theatre/slide3.png" alt="Cinema Image 3" />
+      </div>
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <main class="main-content">
+      <!-- Mission Section -->
+      <div class="section">
+        <h2>Our Mission</h2>
+        <p>
+          At CINESTAR, we aim to foster a strong sense of community through
+          engaging activities, cultural programs, and services that enrich the
+          lives of our residents. We believe in creating an inclusive
+          environment where everyone feels at home.
+        </p>
+      </div>
+
+      <!-- Values Section -->
+      <div class="section">
+        <h2>Our Values</h2>
+        <p>
+          <strong>Community Engagement:</strong> Actively involving our
+          community in decision-making and events.
+        </p>
+        <p>
+          <strong>Integrity:</strong> Upholding honesty and transparency in all
+          our interactions.
+        </p>
+        <p>
+          <strong>Innovation:</strong> Continuously seeking new ways to enhance
+          our offerings and services.
+        </p>
+        <p>
+          <strong>Excellence:</strong> Striving for the highest quality in
+          everything we do.
+        </p>
+      </div>
+
+      <!-- History Section -->
+      <div class="section">
+        <h2>Our History</h2>
+        <p>
+          CINESTAR was founded in 2024 by a group of two who saw the need for a
+          community hub that brought people together.
+        </p>
+      </div>
+
+      <!-- What We Offer Section -->
+      <div class="section">
+        <h2>What We Offer</h2>
+        <p>
+          <strong>Community Events:</strong> Monthly festivals, cultural
+          celebrations, and seasonal gatherings.
+        </p>
+        <p>
+          <strong>Educational Programs:</strong> Workshops on various topics,
+          including arts, technology, and health.
+        </p>
+        <p>
+          <strong>Family-Friendly Activities:</strong> Movie nights, game days,
+          and holiday celebrations.
+        </p>
+        <p>
+          <strong>Support Services:</strong> Resources for local residents,
+          including counseling and job placement assistance.
+        </p>
+      </div>
+
+      <!-- Get Involved Section -->
+      <div class="section">
+        <h2>Get Involved</h2>
+        <p>
+          We welcome community members to join us in our mission. Whether you
+          want to attend events, participate in workshops, or simply enjoy our
+          offerings, there’s a place for you at CINESTAR. Together, we can make
+          a difference!
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 CINESTAR. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let slideIndex = 0;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function showSlides(n) {
+        let slides = document.getElementsByClassName("carousel-slide");
+        if (n >= slides.length) {
+          slideIndex = 0;
+        }
+        if (n < 0) {
+          slideIndex = slides.length - 1;
+        }
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex].style.display = "block";
+      }
+
+      // Display the first slide on load
+      document.addEventListener("DOMContentLoaded", () => {
+        showSlides(slideIndex);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const moviesLink = document.querySelector(".menu li a[href='#movies']");
+        const currentHash = window.location.hash;
+
+        if (currentHash === "#movies") {
+          moviesLink.classList.add("active");
+        }
+      });
+
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>
